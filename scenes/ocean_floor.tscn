@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bl6tsa0fvagbi"]
+
+[ext_resource type="Shader" path="res://example/boujie_water_shader/DropWithDistance.gdshader" id="1_dna3q"]
+[ext_resource type="Texture2D" uid="uid://dwsniss71hd03" path="res://example/boujie_water_shader/Sand.png" id="2_17x8t"]
+[ext_resource type="Script" path="res://example/boujie_water_shader/ocean_floor.gd" id="3_p7nvl"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mv30r"]
+subdivide_width = 16
+subdivide_depth = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0bbsx"]
+render_priority = 0
+shader = ExtResource("1_dna3q")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = null
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.1, 0.1, 0.1)
+shader_parameter/uv1_offset = null
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = null
+shader_parameter/drop_far = 2000.0
+shader_parameter/texture_albedo = ExtResource("2_17x8t")
+
+[node name="OceanFloor" type="MeshInstance3D"]
+transform = Transform3D(8000, 0, 0, 0, 1, 0, 0, 0, 8000, 0, -350, 0)
+mesh = SubResource("PlaneMesh_mv30r")
+skeleton = NodePath("../../Other_Designers")
+surface_material_override/0 = SubResource("ShaderMaterial_0bbsx")
+script = ExtResource("3_p7nvl")
